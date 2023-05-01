@@ -25,6 +25,7 @@ COPY run.sh /run.sh
 
 # Set environment variables (if needed)
 ENV PORT=8081
+EXPOSE ${PORT}
 
 EXPOSE ${PORT}/tcp
 
