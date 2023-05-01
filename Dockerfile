@@ -27,6 +27,7 @@ COPY . .
 
 # Set environment variables (if needed)
 ENV PORT=8081
+EXPOSE ${PORT}
 
 # Start the server
 ##CMD ["python", "manage.py", "runserver", "0.0.0.0:" + str(PORT)]
