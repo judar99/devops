@@ -9,7 +9,6 @@ pipeline {
             }
         }
 
-
         stage('Construir imagen de Docker') {
             steps {
                 echo 'Construyendo imagen de Docker...'
@@ -20,7 +19,7 @@ pipeline {
         stage('Desplegar contenedor de Docker') {
             steps {
                 echo 'Desplegando contenedor de Docker...'
-                bat 'docker run -p 80:80 -d devops'
+                bat 'docker run -p 8080:8081 -d devops'
             }
         }
     }
