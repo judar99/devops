@@ -1,8 +1,7 @@
 # Base image
-FROM python:3.9
+FROM python:3.9-alpine
 
 # Set working directory
-
 WORKDIR /app
 
 # Install virtualenv
@@ -15,21 +14,22 @@ RUN . venv/bin/activate
 # Copy the requirements file
 COPY requirements.txt .
 
-# Install dependencies
 
+# Install dependencies
 RUN pip install -r requirements.txt
 
 # Copy the project directory
 COPY . .
 
-# Collect static files (if needed)
-##RUN python manage.py collectstatic --noinput
+COPY run.sh /run.sh
 
 # Set environment variables (if needed)
 ENV PORT=8081
 
-# Start the server
-##CMD ["python", "manage.py", "runserver", "0.0.0.0:" + str(PORT)]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8081"]
+EXPOSE ${PORT}/tcp
 
+RUN python manage.py migrate
+
+# Start the server
+CMD ["/run.sh", "python", "manage.py", "runserver", "0.0.0.0:8081"]
 
