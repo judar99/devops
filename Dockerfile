@@ -25,11 +25,10 @@ COPY . .
 
 # Set environment variables (if needed)
 ENV PORT=8081
-EXPOSE ${PORT}
 
 EXPOSE ${PORT}/tcp
 
 RUN python manage.py migrate
 
 # Start the server
-CMD ["/start.sh", "python", "manage.py", "runserver", "0.0.0.0:8081"]
+CMD ["/start.sh", "python", "manage.py", "runserver", "0.0.0.0:${PORT}"]
